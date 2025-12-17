@@ -1,0 +1,8 @@
+input_schema:
+  student_id: integer
+  course_id: integer
+  chapter_order: integer
+  time_spent: float
+  score: float
+  completed: integer  # 0 or 1
+
