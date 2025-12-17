@@ -4,7 +4,9 @@ import pandas as pd
 import sys
 import os
 
-sys.path.append(os.path.abspath(r"C:\Users\kisho\Downloads\learning_intelligence_ai\src"))
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC_DIR = os.path.join(ROOT_DIR, "src")
+sys.path.append(SRC_DIR)
 
 from inference import run_inference
 from insights import analyze_chapter_difficulty, generate_insights
