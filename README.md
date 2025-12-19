@@ -27,3 +27,26 @@ This is a fully executable AI tool (CLI-based), The AI tool can be accessed via 
 ---
 
 ## Project Structure
+Learning-Intelligence-AI-main
+│   .gitignore
+│   app.py
+│   README.md
+│   requirements.txt
+│   schema.yaml
+│
+├───data
+│       sample_input.csv
+│
+├───models
+│       completion_model.joblib
+│
+├───src
+│       CLI.py
+│       generate_data.py
+│       inference.py
+│       insights.py
+│       model.py
+│       __init__.py
+│
+└───tests
+        test_core.py
