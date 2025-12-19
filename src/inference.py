@@ -1,34 +1,21 @@
 import os
 import joblib
-import pandas as pd
 
-# Resolve project root robustly (works locally + Streamlit Cloud)
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..")
-)
-
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 MODEL_PATH = os.path.join(PROJECT_ROOT, "models", "completion_model.joblib")
 
 
-def run_inference(df: pd.DataFrame) -> pd.DataFrame:
+def run_inference(df):
     if not os.path.exists(MODEL_PATH):
-    from src.model import train_and_save_model
-    train_and_save_model()
-
-    if not os.path.exists(MODEL_PATH):
-        raise FileNotFoundError(
-            f"Model file not found at {MODEL_PATH}. "
-            "Ensure completion_model.joblib is present in the models/ directory."
-        )
+        raise FileNotFoundError(f"Model not found at {MODEL_PATH}")
 
     model = joblib.load(MODEL_PATH)
 
     features = df[["time_spent", "score", "chapter_order"]]
+    probs = model.predict_proba(features)[:, 1]
 
-    completion_prob = model.predict_proba(features)[:, 1]
-
-    df["completion_probability"] = completion_prob
-    df["completion_prediction"] = (completion_prob >= 0.5).astype(int)
+    df["completion_probability"] = probs
+    df["completion_prediction"] = (probs >= 0.5).astype(int)
     df["risk_flag"] = df["completion_probability"].apply(
         lambda x: "HIGH" if x < 0.4 else "LOW"
     )

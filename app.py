@@ -1,16 +1,14 @@
 import streamlit as st
 import pandas as pd
-
 import sys
 import os
 
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC_DIR = os.path.join(ROOT_DIR, "src")
-sys.path.append(SRC_DIR)
+# Ensure src is importable
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(PROJECT_ROOT)
 
-from inference import run_inference
-from insights import analyze_chapter_difficulty, generate_insights
-
+from src.inference import run_inference
+from src.insights import analyze_chapter_difficulty, generate_insights
 
 st.set_page_config(page_title="Learning Intelligence AI Tool")
 
