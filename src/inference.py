@@ -1,7 +1,8 @@
 import pandas as pd
 import joblib
 
-MODEL_PATH = r"C:\Users\kisho\Downloads\learning_intelligence_ai\models\completion_model.joblib"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "completion_model.joblib")
 
 
 def run_inference(df):
