@@ -12,6 +12,10 @@ MODEL_PATH = os.path.join(PROJECT_ROOT, "models", "completion_model.joblib")
 
 def run_inference(df: pd.DataFrame) -> pd.DataFrame:
     if not os.path.exists(MODEL_PATH):
+    from src.model import train_and_save_model
+    train_and_save_model()
+
+    if not os.path.exists(MODEL_PATH):
         raise FileNotFoundError(
             f"Model file not found at {MODEL_PATH}. "
             "Ensure completion_model.joblib is present in the models/ directory."
